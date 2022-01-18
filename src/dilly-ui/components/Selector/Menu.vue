@@ -2,7 +2,7 @@
   <div class="selector-menu">
     <div
       class="menu-item"
-      v-for="(item, index) of data"
+      v-for="(item, index) of searchData"
       :key="index"
       @click="setItemValue(item)"
     >
@@ -11,6 +11,7 @@
   </div>
 </template>
 <script>
+import { ref, onMounted, watch } from "vue";
 export default {
   props: {
     data: {
@@ -19,13 +20,36 @@ export default {
         return [];
       },
     },
+    searchValue: String,
   },
   setup(props, ctx) {
+    const searchData = ref([]);
     const setItemValue = (item) => {
       ctx.emit("setItemValue", item);
     };
+
+    onMounted(() => {
+      searchData.value = props.data;
+    });
+
+    watch(
+      () => {
+        return props.searchValue;
+      },
+      (value) => {
+        filterData(value);
+      }
+    );
+
+    const filterData = (value) => {
+      searchData.value = props.data.filter((item) => {
+        return item.text.toLowerCase().includes(props.searchValue.toLowerCase());
+      });
+    };
+
     return {
       setItemValue,
+      searchData,
     };
   },
 };

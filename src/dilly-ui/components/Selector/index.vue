@@ -1,7 +1,15 @@
 <template>
   <div class="selector" v-focus>
-    <SelectorInput :placeholder="placeholder" :value="inputValue" />
-    <SelectorMenu :data="data" @setItemValue="setItemValue" />
+    <SelectorInput
+      :placeholder="placeholder"
+      :value="inputValue"
+      @searchOptions="searchOptions"
+    />
+    <SelectorMenu
+      :data="data"
+      @setItemValue="setItemValue"
+      :searchValue="searchValue"
+    />
   </div>
 </template>
 <script>
@@ -30,6 +38,7 @@ export default {
   setup(props, ctx) {
     const state = reactive({
       inputValue: "",
+      searchValue: "",
     });
     const setItemValue = (item) => {
       state.inputValue = item.text;
@@ -39,9 +48,14 @@ export default {
       };
       ctx.emit("onSelected", _item);
     };
+
+    const searchOptions = (value) => {
+      state.searchValue = value;
+    };
     return {
       ...toRefs(state),
       setItemValue,
+      searchOptions,
     };
   },
 };

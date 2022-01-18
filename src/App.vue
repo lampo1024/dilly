@@ -26,6 +26,10 @@ export default {
           value: 3,
           text: "React.js",
         },
+        {
+          value: 4,
+          text: "Vue 3.0",
+        }
       ],
       selected: {},
     });
