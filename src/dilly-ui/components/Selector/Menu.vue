@@ -1,18 +1,25 @@
 <template>
   <div class="selector-menu">
-    <div
-      class="menu-item"
-      v-for="(item, index) of searchData"
-      :key="index"
-      @click="setItemValue(item)"
-    >
-      {{ item.text }}
-    </div>
+    <template v-if="searchData.length > 0">
+      <div
+        class="menu-item"
+        v-for="(item, index) of searchData"
+        :key="index"
+        @click="setItemValue(item)"
+      >
+        {{ item.text }}
+      </div>
+    </template>
+    <NoDataTip v-else/>
   </div>
 </template>
 <script>
 import { ref, onMounted, watch } from "vue";
+import NoDataTip from "./NoDataTip";
 export default {
+  components: {
+    NoDataTip,
+  },
   props: {
     data: {
       type: Array,
@@ -43,7 +50,9 @@ export default {
 
     const filterData = (value) => {
       searchData.value = props.data.filter((item) => {
-        return item.text.toLowerCase().includes(props.searchValue.toLowerCase());
+        return item.text
+          .toLowerCase()
+          .includes(props.searchValue.toLowerCase());
       });
     };
 
