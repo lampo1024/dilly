@@ -1,6 +1,5 @@
 export default {
     mounted(el) {
-        console.log(el);
         const oSelectorInput = el.querySelector('.selector-input'),
             oSelectorMenu = el.querySelector('.selector-menu');
         const oInput = oSelectorInput.querySelector('input'),

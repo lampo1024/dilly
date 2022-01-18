@@ -4,7 +4,7 @@
     placeholder="请选择语言"
     @onSelected="handleItemSelected"
   />
-  <p>Selected item: {{menu.selected || json}}</p>
+  <p>Selected item: {{ menu.selected || json }}</p>
 </template>
 
 <script>
@@ -27,11 +27,10 @@ export default {
           text: "React.js",
         },
       ],
-      selected:{}
+      selected: {},
     });
-    const handleItemSelected = (value) => {
-      console.log("selected value:", value);
-      menu.selected =  value;
+    const handleItemSelected = (item) => {
+      menu.selected = item;
     };
     return {
       menu,
