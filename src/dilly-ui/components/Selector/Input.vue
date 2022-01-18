@@ -1,7 +1,7 @@
 <template>
   <div class="selector-input">
     <label class="placeholder">{{ placeholder }}</label>
-    <input type="text" class="input" />
+    <input type="text" class="input" :value="value" />
     <span class="iconfont icon-arrow-down"></span>
   </div>
 </template>
@@ -13,21 +13,23 @@ export default {
       type: String,
       default: "请选择",
     },
+    value: String,
   },
+  setup() {},
 };
 </script>
 <style lang="scss" scoped>
 .selector-input {
   position: relative;
   width: 100%;
-  height: 38px;
+  height: 32px;
   .input {
     width: 100%;
     height: 100%;
-    padding: 0 15px;
+    padding: 0 10px;
     box-sizing: border-box;
     border: 1px solid #999;
-    border-radius: 5px;
+    border-radius: 3px;
     outline: none;
     transition: all 0.2s linear;
 
@@ -38,20 +40,26 @@ export default {
   }
 
   .placeholder {
-    left: 15px;
-    top: 8px;
+    left: 10px;
+    top: 7px;
     color: #999;
+    position: absolute;
+    font-size: 13px;
   }
 
   .iconfont {
-    right: 15px;
-    top: 12px;
+    right: 10px;
+    top: 8px;
     color: #999;
 
     &.icon-search {
       font-size: 22px;
-      top: 8px;
+      top: 6px;
     }
+  }
+  span {
+    position: absolute;
+    top: 6px;
   }
 }
 </style>
